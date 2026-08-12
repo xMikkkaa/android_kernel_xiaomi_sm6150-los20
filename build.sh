@@ -91,7 +91,7 @@ MAKE_ARGS=(
     CROSS_COMPILE="aarch64-linux-gnu-"
     CROSS_COMPILE_ARM32="arm-linux-gnueabi-"
     CLANG_TRIPLE="aarch64-linux-gnu-"
-    KCFLAGS="-Wno-error=fortify-source -Wno-error=sizeof-pointer-memaccess -Wno-error=strict-prototypes -Wno-enum-conversion"
+    KCFLAGS="-Wno-error=fortify-source -Wno-error=sizeof-pointer-memaccess -Wno-error=strict-prototypes -Wno-enum-conversion -Wno-error=default-const-init-field-unsafe -Wno-default-const-init-field-unsafe"
 )
 
 # ─────────────────────────────────────────────────────────────────────────────
