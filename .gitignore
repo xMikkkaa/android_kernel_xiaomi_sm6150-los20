@@ -133,4 +133,4 @@ Android.bp
 
 # out and clang dir
 out/
-clang/
+tools/AnyKernel3
