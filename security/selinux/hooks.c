@@ -102,6 +102,7 @@ struct selinux_state selinux_state;
 #ifdef CONFIG_KSU_SUSFS
 extern struct selinux_state fake_state;
 extern bool ksu_selinux_hide_running __read_mostly;
+extern bool ksu_adb_root_should_hide_context(const char *context);
 #endif // #ifdef CONFIG_KSU_SUSFS
 
 /* SECMARK reference count */
@@ -6339,6 +6340,9 @@ static int my_setprocattr(const char *name, void *value, size_t size)
 			str[size-1] = 0;
 			size--;
 		}
+
+		if (ksu_adb_root_should_hide_context(str))
+			return -EINVAL;
 
 		error = security_context_to_sid(&fake_state, value, size,
 						&sid, GFP_KERNEL);

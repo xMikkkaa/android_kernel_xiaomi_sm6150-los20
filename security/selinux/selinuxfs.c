@@ -45,6 +45,7 @@
 #ifdef CONFIG_KSU_SUSFS
 extern struct selinux_state fake_state;
 extern bool ksu_selinux_hide_running __read_mostly;
+extern bool ksu_adb_root_should_hide_context(const char *context);
 #endif // #ifdef CONFIG_KSU_SUSFS
 
 enum sel_inos {
@@ -642,6 +643,9 @@ static ssize_t my_write_context(struct file *file, char *buf, size_t size)
 	if (likely(current_uid().val < 10000 || !ksu_selinux_hide_running))
 		return sel_write_context(file, buf, size);
 
+	if (ksu_adb_root_should_hide_context(buf))
+		return -EINVAL;
+
 	length = avc_has_perm(&selinux_state,
 			      current_sid(), SECINITSID_SECURITY,
 			      SECCLASS_SECURITY, SECURITY__CHECK_CONTEXT, NULL);
@@ -961,6 +965,11 @@ static ssize_t my_write_access(struct file *file, char *buf, size_t size)
 	if (sscanf(buf, "%s %s %hu", scon, tcon, &tclass) != 3)
 		goto out;
 
+	if (ksu_adb_root_should_hide_context(scon) || ksu_adb_root_should_hide_context(tcon)) {
+		length = -EINVAL;
+		goto out;
+	}
+
 	length = security_context_str_to_sid(&fake_state, scon, &ssid, GFP_KERNEL);
 	if (length)
 		goto out;
@@ -970,6 +979,14 @@ static ssize_t my_write_access(struct file *file, char *buf, size_t size)
 		goto out;
 
 	security_compute_av_user(&fake_state, ssid, tsid, tclass, &avd);
+
+	/* apply configured spoof rules (fsck_untrusted, adbd->adbroot, shell->su transition) */
+	if (strstr(scon, "fsck_untrusted") && strstr(tcon, "fsck_untrusted"))
+		avd.allowed &= ~0x00200000;
+	if (strstr(scon, "adbd") && strstr(tcon, "adbroot"))
+		avd.allowed &= ~0x00000002;
+	if (tclass == SECCLASS_PROCESS && strcmp(scon, "u:r:shell:s0") == 0 && strcmp(tcon, "u:r:su:s0") == 0)
+		avd.allowed = 0;
 
 	length = scnprintf(buf, SIMPLE_TRANSACTION_LIMIT,
 			  "%x %x %x %x %u %x",
