@@ -26,7 +26,12 @@ DTB_LIST := $(addsuffix .dtb,$(DTB_NAMES))
 else
 DTB_LIST := $(dtb-y)
 endif
-DTB_OBJS := $(shell find $(obj)/dts/ -name \*.dtb)
+# FIX: Respect CONFIG_BUILD_ARM64_APPENDED_DTB_IMAGE_NAMES if set, otherwise use DTB_LIST
+ifneq ($(CONFIG_BUILD_ARM64_APPENDED_DTB_IMAGE_NAMES),"")
+DTB_OBJS := $(addprefix $(obj)/dts/, $(addsuffix .dtb, $(shell echo $(CONFIG_BUILD_ARM64_APPENDED_DTB_IMAGE_NAMES) | sed 's/"//g')))
+else
+DTB_OBJS := $(addprefix $(obj)/dts/, $(DTB_LIST))
+endif
 
 # Add RTIC DTB to the DTB list if RTIC MPGen is enabled
 # Note, we keep this for compatibility with
