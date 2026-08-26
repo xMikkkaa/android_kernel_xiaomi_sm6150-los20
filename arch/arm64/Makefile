@@ -178,9 +178,8 @@ endif
 
 KBUILD_DTBS	:= dtbs
 
-ifeq ($(CONFIG_BUILD_ARM64_DT_OVERLAY),y)
+# FIX: Always export -@ so base DTBs get __symbols__ even when OVERLAY logic is disabled
 export DTC_FLAGS := -@
-endif
 
 all:	$(KBUILD_DTBS) $(KBUILD_TARGET)
 
