@@ -300,7 +300,6 @@ ifeq ($(CONFIG_BUILD_ARM64_DT_OVERLAY),y)
 		davinci_m0b-sdmmagpie-overlay.dtbo \
 		phoenix-sdmmagpie-overlay.dtbo \
 		tucana-sdmmagpie-overlay.dtbo \
-		toco-sdmmagpie-overlay.dtbo \
 		sdmmagpiep-idp-overlay.dtbo \
 		sdmmagpiep-atp-overlay.dtbo \
 		sdmmagpiep-qrd-overlay.dtbo \
@@ -325,7 +324,8 @@ sdmmagpie-external-codec-idp-overlay.dtbo-base := sdmmagpie.dtb
 sdmmagpie-usbc-idp-overlay.dtbo-base := sdmmagpie.dtb
 sdmmagpie-dual-display-idp-overlay.dtbo-base := sdmmagpie.dtb
 else
-dtb-$(CONFIG_ARCH_SDMMAGPIE)	+= sdmmagpie-rumi.dtb \
+dtb-$(CONFIG_ARCH_SDMMAGPIE)	+= sdmmagpie.dtb \
+	sdmmagpie-rumi.dtb \
 	sdmmagpie-idp.dtb \
 	sdmmagpie-atp.dtb \
 	sdmmagpie-qrd.dtb \
