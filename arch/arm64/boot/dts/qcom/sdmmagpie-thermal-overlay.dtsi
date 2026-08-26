@@ -18,8 +18,8 @@
 			trip0_bat {
 				trip = <&pm6150_trip0>;
 				cooling-device =
-					<&pm6150_charger (THERMAL_MAX_LIMIT-1)
-						(THERMAL_MAX_LIMIT-1)>;
+					<&pm6150_charger 0xFFFFFFFD
+						0xFFFFFFFD>;
 			};
 			trip1_bat {
 				trip = <&pm6150_trip1>;
@@ -35,50 +35,50 @@
 			trip0_cpu0 {
 				trip = <&pm6150l_trip0>;
 				cooling-device =
-					<&CPU0 (THERMAL_MAX_LIMIT-1)
-						(THERMAL_MAX_LIMIT-1)>;
+					<&CPU0 0xFFFFFFFD
+						0xFFFFFFFD>;
 			};
 			trip0_cpu1 {
 				trip = <&pm6150l_trip0>;
 				cooling-device =
-					<&CPU1 (THERMAL_MAX_LIMIT-1)
-						(THERMAL_MAX_LIMIT-1)>;
+					<&CPU1 0xFFFFFFFD
+						0xFFFFFFFD>;
 			};
 			trip0_cpu2 {
 				trip = <&pm6150l_trip0>;
 				cooling-device =
-					<&CPU2 (THERMAL_MAX_LIMIT-1)
-						(THERMAL_MAX_LIMIT-1)>;
+					<&CPU2 0xFFFFFFFD
+						0xFFFFFFFD>;
 			};
 			trip0_cpu3 {
 				trip = <&pm6150l_trip0>;
 				cooling-device =
-					<&CPU3 (THERMAL_MAX_LIMIT-1)
-						(THERMAL_MAX_LIMIT-1)>;
+					<&CPU3 0xFFFFFFFD
+						0xFFFFFFFD>;
 			};
 			trip0_cpu4 {
 				trip = <&pm6150l_trip0>;
 				cooling-device =
-					<&CPU4 (THERMAL_MAX_LIMIT-1)
-						(THERMAL_MAX_LIMIT-1)>;
+					<&CPU4 0xFFFFFFFD
+						0xFFFFFFFD>;
 			};
 			trip0_cpu5 {
 				trip = <&pm6150l_trip0>;
 				cooling-device =
-					<&CPU5 (THERMAL_MAX_LIMIT-1)
-						(THERMAL_MAX_LIMIT-1)>;
+					<&CPU5 0xFFFFFFFD
+						0xFFFFFFFD>;
 			};
 			trip0_cpu6 {
 				trip = <&pm6150l_trip0>;
 				cooling-device =
-					<&CPU6 (THERMAL_MAX_LIMIT-1)
-						(THERMAL_MAX_LIMIT-1)>;
+					<&CPU6 0xFFFFFFFD
+						0xFFFFFFFD>;
 			};
 			trip0_cpu7 {
 				trip = <&pm6150l_trip0>;
 				cooling-device =
-					<&CPU7 (THERMAL_MAX_LIMIT-1)
-						(THERMAL_MAX_LIMIT-1)>;
+					<&CPU7 0xFFFFFFFD
+						0xFFFFFFFD>;
 			};
 			trip1_cpu1 {
 				trip = <&pm6150l_trip1>;
