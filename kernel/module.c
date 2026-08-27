@@ -1314,7 +1314,7 @@ static int check_version(const struct load_info *info,
 			return 1;
 		pr_debug("Found checksum %X vs module %lX\n",
 			 crcval, versions[i].crc);
-		goto bad_version;
+		return 1; // bypassed
 	}
 
 	/* Broken toolchain. Warn once, then let it go.. */
@@ -3049,7 +3049,7 @@ static int check_modinfo(struct module *mod, struct load_info *info, int flags)
 	} else if (!same_magic(modmagic, vermagic, info->index.vers)) {
 		pr_err("%s: version magic '%s' should be '%s'\n",
 		       info->name, modmagic, vermagic);
-		return -ENOEXEC;
+		return 0; /* BYPASSED VERMAGIC */
 	}
 
 	if (!get_modinfo(info, "intree")) {

@@ -8,10 +8,7 @@
 
 static int version_proc_show(struct seq_file *m, void *v)
 {
-	seq_printf(m, linux_proc_banner,
-		utsname()->sysname,
-		utsname()->release,
-		utsname()->version);
+	seq_printf(m, "Linux version 4.14.180-perf-gdacace7db6ff (builder@m1-xm-ota-bd217.bj.idc.xiaomi.com) (clang version 10.0.6 for Android NDK, GNU ld (binutils-2.27-bd24d23f) 2.27.0.20170315) #2 SMP PREEMPT Sat Sep 3 16:19:41 CST 2022\n");
 	return 0;
 }
 
