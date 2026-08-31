@@ -318,4 +318,57 @@ config FILE_TABLE_DEBUG
 	help
 	  This option enables debug of the open files using a global filetable
 
+menu "KernelSU - SuSFS"
+config KSU_SUSFS
+	bool "KernelSU SuSFS"
+	default y
+	help
+	  Enable SuSFS for KernelSU.
+
+config KSU_SUSFS_SUS_PATH
+	bool "Enable sus_path feature"
+	depends on KSU_SUSFS
+	default y
+
+config KSU_SUSFS_SUS_MOUNT
+	bool "Enable sus_mount feature"
+	depends on KSU_SUSFS
+	default y
+
+config KSU_SUSFS_SUS_KSTAT
+	bool "Enable sus_kstat feature"
+	depends on KSU_SUSFS
+	default y
+
+config KSU_SUSFS_SUS_MAP
+	bool "Enable sus_map feature"
+	depends on KSU_SUSFS
+	default y
+
+config KSU_SUSFS_SPOOF_UNAME
+	bool "Enable spoof_uname feature"
+	depends on KSU_SUSFS
+	default y
+
+config KSU_SUSFS_ENABLE_LOG
+	bool "Enable susfs logging"
+	depends on KSU_SUSFS
+	default y
+
+config KSU_SUSFS_HIDE_KSU_SUSFS_SYMBOLS
+	bool "Hide KernelSU and SuSFS symbols from kallsyms"
+	depends on KSU_SUSFS
+	default y
+
+config KSU_SUSFS_SPOOF_CMDLINE_OR_BOOTCONFIG
+	bool "Enable spoof cmdline or bootconfig feature"
+	depends on KSU_SUSFS
+	default y
+
+config KSU_SUSFS_OPEN_REDIRECT
+	bool "Enable open redirect feature"
+	depends on KSU_SUSFS
+	default y
+endmenu
+
 endmenu
